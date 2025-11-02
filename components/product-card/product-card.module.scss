@@ -1,0 +1,47 @@
+.card {
+    display: block;
+    transition: var(--transition);
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background-color: #f5f5f5;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .image {
+    object-fit: cover;
+    transition: var(--transition);
+  }
+  
+  .card:hover .image {
+    transform: scale(1.05);
+  }
+  
+  .content {
+    padding: 0 var(--spacing-xs);
+  }
+  
+  .name {
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+  
+  .designer {
+    color: var(--color-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .price {
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
