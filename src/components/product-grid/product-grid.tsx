@@ -1,4 +1,3 @@
-// components/ProductGrid/ProductGrid.tsx
 import { Product } from "@/lib/types";
 import ProductCard from "../product-card/product-card";
 import styles from "./product-grid.module.scss";

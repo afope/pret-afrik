@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/lib/types";
-import styles from "./product-card.module.css";
+import styles from "./product-card.module.scss";
 import classNames from "classnames/bind";
 
 const css = classNames.bind(styles);
