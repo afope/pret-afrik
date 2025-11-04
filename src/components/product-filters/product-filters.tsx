@@ -2,6 +2,9 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./product-filters.module.scss";
+import classNames from "classnames/bind";
+
+const css = classNames.bind(styles);
 
 interface Designer {
   id: string;
@@ -38,21 +41,21 @@ export default function ProductFilters({ designers }: ProductFiltersProps) {
   const currentDesigner = searchParams.get("designer");
 
   return (
-    <div className={styles.filters}>
-      <div className={styles.header}>
+    <div className={css("filters")}>
+      <div className={css("header")}>
         <h3>Filters</h3>
         {(currentCategory || currentDesigner) && (
-          <button onClick={clearFilters} className={styles.clear}>
+          <button onClick={clearFilters} className={css("clear")}>
             Clear All
           </button>
         )}
       </div>
 
-      <div className={styles.group}>
+      <div className={css("group")}>
         <h4>Category</h4>
-        <div className={styles.options}>
+        <div className={css("options")}>
           {categories.map((category) => (
-            <label key={category} className={styles.option}>
+            <label key={category} className={css("option")}>
               <input
                 type="checkbox"
                 checked={currentCategory === category.toLowerCase()}
@@ -66,11 +69,11 @@ export default function ProductFilters({ designers }: ProductFiltersProps) {
         </div>
       </div>
 
-      <div className={styles.group}>
+      <div className={css("group")}>
         <h4>Designer</h4>
-        <div className={styles.options}>
+        <div className={css("options")}>
           {designers.map((designer) => (
-            <label key={designer.id} className={styles.option}>
+            <label key={designer.id} className={css("option")}>
               <input
                 type="checkbox"
                 checked={currentDesigner === designer.id}

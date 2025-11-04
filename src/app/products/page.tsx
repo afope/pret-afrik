@@ -3,6 +3,9 @@ import { createClient } from "@/lib/supabase/server";
 import ProductGrid from "@/components/product-grid/product-grid";
 import ProductFilters from "@/components/product-filters/product-filters";
 import styles from "./page.module.scss";
+import classNames from "classnames/bind";
+
+const css = classNames.bind(styles);
 
 export default async function ProductsPage({
   searchParams,
@@ -34,19 +37,21 @@ export default async function ProductsPage({
     .select("id, name")
     .eq("is_active", true);
 
+  console.log("products", products);
+
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <div className={css("container")}>
+      <div className={css("header")}>
         <h1>Shop All</h1>
         <p>{products?.length || 0} products</p>
       </div>
 
-      <div className={styles.layout}>
-        <aside className={styles.sidebar}>
+      <div className={css("layout")}>
+        <aside className={css("sidebar")}>
           <ProductFilters designers={designers || []} />
         </aside>
 
-        <div className={styles.main}>
+        <div className={css("main")}>
           <ProductGrid products={products || []} />
         </div>
       </div>

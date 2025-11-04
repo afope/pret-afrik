@@ -1,66 +1,37 @@
-import Image from "next/image";
+// app/page.tsx
+import { createClient } from "@/lib/supabase/server";
+import ProductGrid from "@/components/product-grid/product-grid";
 import styles from "./page.module.scss";
+import classNames from "classnames/bind";
 
-export default function Home() {
+const css = classNames.bind(styles);
+
+export default async function HomePage() {
+  const supabase = await createClient();
+
+  const { data: products } = await supabase
+    .from("products")
+    .select("*, designer:designers(*)")
+    .eq("is_active", true)
+    .order("created_at", { ascending: false })
+    .limit(8);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+    <div>
+      <section className={css("hero")}>
+        <div className={css("heroContent")}>
+          <h1>Discover African Fashion</h1>
+          <p>Curated designs from the continent&apos;s finest creators</p>
+          <a href="/products" className={css("heroButton")}>
+            Shop Now
           </a>
         </div>
-      </main>
+      </section>
+
+      <section className="container">
+        <h2 className={css("sectionTitle")}>New Arrivals</h2>
+        <ProductGrid products={products || []} />
+      </section>
     </div>
   );
 }
